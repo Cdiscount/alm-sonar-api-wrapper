@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Cdiscount.Alm.Sonar.Api.Wrapper</id>
+    <version>1.0.0.0</version>
+    <title>Cdiscount.Alm.Sonar.Api.Wrapper</title>
+    <authors>Folly Adjanoh</authors>
+    <owners>ALM Team</owners>
+    <description>Api wrapper for Sonar 5.6.6</description>
+    <releaseNotes>Initial version.</releaseNotes>
+    <copyright>Copyright Cdiscount 2017</copyright>
+    <projectUrl>https://github.com/Cdiscount/alm-sonar-api-wrapper</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/Cdiscount/alm-sonar-api-wrapper/master/LICENSE</licenseUrl> 
+    <tags>Cdiscount, Alm, Sonar, API, Wrapper</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="9.0.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Cdiscount.Alm.Sonar.Api.Wrapper.dll" target="lib" />
+    <file src="Cdiscount.Alm.Sonar.Api.Wrapper.Core.dll" target="lib" />
+  </files>
+</package>
