@@ -1,7 +1,8 @@
 # Welcome to the ALM Sonar API Wrapper project #
 # Overview #
 
-This repository contains tools to help integrate SonarQube API. This solution create a nuget package you can use in your custom .NET solutions to connect to Sonar
+This repository contains tools to help integrate SonarQube API. This solution create a nuget package you can use in your custom .NET solutions to connect to Sonar.
+
 The package is available on **nuget.org** with the Id **Cdiscount.Alm.Sonar.Api.Wrapper**
 
 # Configuration #
@@ -10,25 +11,25 @@ You must congigure the **app.config** with your connection settings :
  - add key="SonarApiToken" value="{YourToken}"
 
 # Projects #
-**Cdiscount.Alm.Sonar.Api.Wrapper**
+- **Cdiscount.Alm.Sonar.Api.Wrapper**
 
 In this project, you can find the client wrapper to connect to Sonar. This project creates the nuget package *Cdiscount.Alm.Sonar.Api.Wrapper.nupkg*
 
-**Cdiscount.Alm.Sonar.Api.Wrapper.Core**
+- **Cdiscount.Alm.Sonar.Api.Wrapper.Core**
 
 In this project, you can find object represent Sonar entities (Parameters and Response)
 
-**Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Integration**
+- **Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Integration**
 
 Integration tests are executed on the Sonar Uri. 
 This tests need the App.config of the Tests.Integration project to be configured (by setting SonarApiUri and SonarApiToken) 
 
 
-**Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit**
+- **Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit**
 
 In this project, you can find unit tests definition. There are two kind of unit tests: 
  - Unit tests used to check development integrity
- - Unit tests used to ensure homogeneity between each Cdiscount team developments
+ - Unit tests used to ensure homogeneity between each developments team 
 
 
 # Build #
