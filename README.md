@@ -28,8 +28,8 @@ This tests need the App.config of the Tests.Integration project to be configured
 - **Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit**
 
 In this project, you can find unit tests definition. There are two kind of unit tests: 
- - Unit tests used to check development integrity
- - Unit tests used to ensure homogeneity between each developments team 
+ 1. Unit tests used to check development integrity
+ 2. Unit tests used to ensure homogeneity between each developments team 
 
 
 # Build #
