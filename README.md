@@ -45,25 +45,6 @@ The build workflow ensure :
 
 Specifically, the release will generate the nuget package *Cdiscount.Alm.Sonar.Api.Wrapper.nupkg* 
 
-# How to contribute? #
-
-**The process**
- 
- Before contributing, please check if your new development has not been already developed
- 1. Create branch from the Master branch 
- 2. Develop on the new branche
- 3. Pull request your new development to an ALM team member
- 4. ALM valid (or indicate if the code needs work)
- 5. Your branch is merged to the Master branch and your branch is destroyed
- 
- 
-**Hints**
- 
- ##How to use TFS Git ?
- https://blogs.msdn.microsoft.com/visualstudioalm/2013/01/30/getting-started-with-git-in-visual-studio-and-team-foundation-service/
- 
- ##How to pull request ?
- https://www.visualstudio.com/en-us/docs/git/pull-requests 
 
    
    
