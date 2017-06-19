@@ -31,6 +31,16 @@ In this project, you can find unit tests definition. There are two kind of unit 
  1. Unit tests used to check development integrity
  2. Unit tests used to ensure homogeneity between each developments team 
 
+ 
+# Usage # 
+
+To get the number of issues assigned to user1
+
+```cs
+SonarApiClient sonarApiClient = new SonarApiClient();
+var result = sonarApiClient.Issues.Search(new SonarIssuesSearchArgs() { Assignees = new List<string>() { user1 } });
+var int nbIssues = result.Paging.Total;
+```
 
 # Build #
 
