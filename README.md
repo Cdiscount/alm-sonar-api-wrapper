@@ -38,7 +38,7 @@ To get the number of issues assigned to user1
 
 ```cs
 SonarApiClient sonarApiClient = new SonarApiClient();
-var result = sonarApiClient.Issues.Search(new SonarIssuesSearchArgs() { Assignees = new List<string>() { user1 } });
+var result = sonarApiClient.Issues.Search(new SonarIssuesSearchArgs() { Assignees = new List<string>() { "user1" } });
 var int nbIssues = result.Paging.Total;
 ```
 
