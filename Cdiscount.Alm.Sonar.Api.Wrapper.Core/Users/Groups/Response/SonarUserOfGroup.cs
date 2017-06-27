@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Users.Groups.Response
 {
+
     public class SonarUserOfGroup: SonarUserBase
     {
         /// <summary>

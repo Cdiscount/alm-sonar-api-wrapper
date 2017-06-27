@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.QualityGates.Parameters
 {
@@ -12,6 +7,7 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.QualityGates.Parameters
     /// </summary>
     public class SonarQualityGateShowArgs
     {
+        
         /// <summary>
         /// Create arguments to show the details of a quality gate 
         /// Either id or name must be set

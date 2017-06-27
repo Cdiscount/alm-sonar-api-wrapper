@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Permissions.Global.Response
 {
+    
     /// <summary>
     /// Represents a permission in the result of search global permission
     /// </summary>

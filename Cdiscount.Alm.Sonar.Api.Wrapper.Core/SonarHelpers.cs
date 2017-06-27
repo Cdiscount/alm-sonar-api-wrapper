@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core
 {
+
     public static class SonarHelpers
     {
         public static string FormatDateForSonarIso8601(DateTime date)

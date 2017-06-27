@@ -8,9 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Specialized;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.Permissions
 {
+    
     /// <summary>
     /// Manage permission templates
     /// </summary>
@@ -20,10 +23,15 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.Permissions
         /// List global permissions
         /// </summary>
         /// <returns></returns>
-        public SonarPermissionsSearchGlobal SearchGlobal()
+        public SonarPermissionsSearchGlobal SearchGlobal(IConfigurationRoot configuration)
         {
             string url = string.Format("{0}api/permissions/search_global_permissions", SonarApiClient.BaseAddress);
-            return SonarApiClient.QueryObject<SonarPermissionsSearchGlobal>(url);
+            return SonarApiClient.QueryObject<SonarPermissionsSearchGlobal>(url, configuration);
+        }
+        public SonarPermissionsSearchGlobal SearchGlobal(NameValueCollection configuration)
+        {
+            string url = string.Format("{0}api/permissions/search_global_permissions", SonarApiClient.BaseAddress);
+            return SonarApiClient.QueryObject<SonarPermissionsSearchGlobal>(url, configuration);
         }
 
         /// <summary>
@@ -31,16 +39,26 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.Permissions
         /// </summary>
         /// <param name="sonarPermissionsSearchProjectArgs"></param>
         /// <returns></returns>
-        public SonarPermissionsSearchProject SearchProject(SonarPermissionsSearchProjectArgs sonarPermissionsSearchProjectArgs)
+        public SonarPermissionsSearchProject SearchProject(SonarPermissionsSearchProjectArgs sonarPermissionsSearchProjectArgs, IConfigurationRoot configuration)
         {
             string url = string.Format("{0}api/permissions/search_project_permissions{1}", SonarApiClient.BaseAddress
                 , (sonarPermissionsSearchProjectArgs == null) ? String.Empty : sonarPermissionsSearchProjectArgs.ToString());
-            return SonarApiClient.QueryObject<SonarPermissionsSearchProject>(url);
+            return SonarApiClient.QueryObject<SonarPermissionsSearchProject>(url, configuration);
+        }
+        public SonarPermissionsSearchProject SearchProject(SonarPermissionsSearchProjectArgs sonarPermissionsSearchProjectArgs, NameValueCollection configuration)
+        {
+            string url = string.Format("{0}api/permissions/search_project_permissions{1}", SonarApiClient.BaseAddress
+                , (sonarPermissionsSearchProjectArgs == null) ? String.Empty : sonarPermissionsSearchProjectArgs.ToString());
+            return SonarApiClient.QueryObject<SonarPermissionsSearchProject>(url, configuration);
         }
 
-        public SonarPermissionsSearchProject SearchProject()
+        public SonarPermissionsSearchProject SearchProject(IConfigurationRoot configuration)
         {
-            return SearchProject(null);
+            return SearchProject(null, configuration);
+        }
+        public SonarPermissionsSearchProject SearchProject(NameValueCollection configuration)
+        {
+            return SearchProject(null, configuration);
         }
 
         /// <summary>
@@ -48,16 +66,26 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.Permissions
         /// </summary>
         /// <param name="sonarPermissionsSearchTemplatesArgs"></param>
         /// <returns></returns>
-        public SonarPermissionsSearchTemplates SearchTemplate(SonarPermissionsSearchTemplatesArgs sonarPermissionsSearchTemplatesArgs)
+        public SonarPermissionsSearchTemplates SearchTemplate(SonarPermissionsSearchTemplatesArgs sonarPermissionsSearchTemplatesArgs, IConfigurationRoot configuration)
         {
             string url = string.Format("{0}api/permissions/search_templates{1}", SonarApiClient.BaseAddress
                 , (sonarPermissionsSearchTemplatesArgs == null) ? String.Empty : sonarPermissionsSearchTemplatesArgs.ToString());
-            return SonarApiClient.QueryObject<SonarPermissionsSearchTemplates>(url);
+            return SonarApiClient.QueryObject<SonarPermissionsSearchTemplates>(url, configuration);
+        }
+        public SonarPermissionsSearchTemplates SearchTemplate(SonarPermissionsSearchTemplatesArgs sonarPermissionsSearchTemplatesArgs, NameValueCollection configuration)
+        {
+            string url = string.Format("{0}api/permissions/search_templates{1}", SonarApiClient.BaseAddress
+                , (sonarPermissionsSearchTemplatesArgs == null) ? String.Empty : sonarPermissionsSearchTemplatesArgs.ToString());
+            return SonarApiClient.QueryObject<SonarPermissionsSearchTemplates>(url, configuration);
         }
 
-        public SonarPermissionsSearchTemplates SearchTemplate()
+        public SonarPermissionsSearchTemplates SearchTemplate(IConfigurationRoot configuration)
         {
-            return SearchTemplate(null);
+            return SearchTemplate(null, configuration);
+        }
+        public SonarPermissionsSearchTemplates SearchTemplate(NameValueCollection configuration)
+        {
+            return SearchTemplate(null, configuration);
         }
     }
 }

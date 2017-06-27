@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Permissions.Template.Parameters
 {
+    
     /// <summary>
     /// Arguments to list permission templates
     /// </summary>

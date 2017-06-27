@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
     /// <summary>
     /// Class inherited from WebClient which override GetWebRequest method to specify a custom timeout
     /// </summary>
-    public class CustomTimeOutWebClient : WebClient
+    public class CustomTimeOutWebClient : HttpClient
     {
         private readonly int _requestTimeOut;
 
@@ -28,11 +29,12 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         /// </summary>
         /// <param name="address">The URI.</param>
         /// <returns></returns>
-        protected override WebRequest GetWebRequest(Uri address)
+        /*protected override WebRequest GetWebRequest(Uri address)
         {
             WebRequest w = base.GetWebRequest(address);
             w.Timeout = _requestTimeOut;
             return w;
-        }
+        }*/
+
     }
 }

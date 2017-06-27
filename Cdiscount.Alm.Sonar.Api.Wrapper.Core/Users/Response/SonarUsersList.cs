@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Users.Response
 {
+    
     /// <summary>
     /// Represents a list of users
     /// </summary>
