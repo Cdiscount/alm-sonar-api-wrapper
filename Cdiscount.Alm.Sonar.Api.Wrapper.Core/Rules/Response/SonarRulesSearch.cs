@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Rules.Response
 {
+    
     /// <summary>
     /// Represents the result of rules searching
     /// </summary>

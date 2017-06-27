@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Comment.Response
 {
+
     public class SonarComment : ISonarObject
     {
         /// <summary>

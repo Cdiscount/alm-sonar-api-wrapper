@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="SonarQube - Alm.Sonar.Api.Wrapper Alm" ToolsVersion="14.0">
-  <Include Path="..\sonarqube\alm_alm.sonar.api.wrappercsharp.ruleset" Action="Default" />
-</RuleSet>

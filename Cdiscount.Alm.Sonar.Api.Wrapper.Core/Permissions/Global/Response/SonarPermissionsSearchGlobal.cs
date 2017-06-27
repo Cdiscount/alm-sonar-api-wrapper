@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Permissions.Global.Response
 {
+    
     /// <summary>
     /// Represents a list of global permissions.
     /// </summary>

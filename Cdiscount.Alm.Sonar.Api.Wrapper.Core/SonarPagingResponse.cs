@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core
 {
+    
     /// <summary>
     /// Helps to handle Sonar queries that spans multiples "pages"
     /// </summary>

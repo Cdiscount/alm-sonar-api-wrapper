@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Specialized;
+using Microsoft.Extensions.Configuration;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Integration
 {
@@ -9,9 +11,14 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Integration
         protected static SonarApiClient SonarApiClient { get; set; }
 
         [AssemblyInitialize()]
-        public static void AssemblyInit(TestContext context)
+        public static void AssemblyInit(TestContext context, NameValueCollection configuration)
         {
-            SonarApiClient = new SonarApiClient();
+            SonarApiClient = new SonarApiClient(configuration);
+        }
+
+        public static void AssemblyInit(TestContext context, IConfigurationRoot configuration)
+        {
+            SonarApiClient = new SonarApiClient(configuration);
         }
 
         [TestCleanup]

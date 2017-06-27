@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.QualityGates.Response
 {
+    
     /// <summary>
     /// Represents the list of quality gates
     /// </summary>

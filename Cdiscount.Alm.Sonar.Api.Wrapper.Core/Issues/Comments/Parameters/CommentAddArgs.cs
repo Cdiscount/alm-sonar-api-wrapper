@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+using System.Net;
+
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Comments.Parameters
 {
+
     public class CommentAddArgs
     {
         /// <summary>
@@ -30,7 +28,7 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Comments.Parameters
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("issue={0}&text={1}&format={2}", IssueKey, HttpUtility.UrlEncode(Text), Format);
+            return String.Format("issue={0}&text={1}&format={2}", IssueKey, WebUtility.UrlEncode(Text), Format);
         }
     }
 }

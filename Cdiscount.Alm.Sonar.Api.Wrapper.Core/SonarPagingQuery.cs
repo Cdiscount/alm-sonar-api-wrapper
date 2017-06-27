@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core
 {
+
     public class SonarPagingQuery
     {
         private int? _pageIndex;
