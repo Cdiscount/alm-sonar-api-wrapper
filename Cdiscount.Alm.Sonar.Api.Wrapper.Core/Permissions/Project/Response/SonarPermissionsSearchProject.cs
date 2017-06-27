@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Permissions.Project.Response
 {
+    
     /// <summary>
     /// Represents a list of project permissions.
     /// </summary>

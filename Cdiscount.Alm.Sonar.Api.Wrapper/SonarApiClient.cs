@@ -5,9 +5,9 @@ using Cdiscount.Alm.Sonar.Api.Wrapper.Business.Languages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Cdiscount.Alm.Sonar.Api.Wrapper.Business.Rules;
@@ -19,6 +19,13 @@ using Cdiscount.Alm.Sonar.Api.Wrapper.Business.Users;
 using Cdiscount.Alm.Sonar.Api.Wrapper.Business.Users.Groups;
 using Cdiscount.Alm.Sonar.Api.Wrapper.Business.Permissions;
 using Cdiscount.Alm.Sonar.Api.Wrapper.Business.Metrics;
+using Cdiscount.Alm.Sonar.Api.Wrapper.Business.Measures;
+
+
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.FileExtensions;
+using Microsoft.Extensions.Configuration.Json;
+using System.Collections.Specialized;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper
 {
@@ -28,24 +35,26 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
     /// </summary>
     public class SonarApiClient
     {
+   
         #region attributes
 
-        private readonly string _baseAddress;
+        private string _baseAddress;
 
         // used for paged searches
-        private readonly Issues _issues;
-        private readonly Business.System.System _system;
-        private readonly Filters _filters;
-        private readonly Languages _languages;
-        private readonly Rules _rules;
-        private readonly QualityProfiles _qualityProfiles;
-        private readonly QualityGates _qualityGates;
-        private readonly Projects _projects;
-        private readonly Plugins _plugins;
-        private readonly Users _users;
-        private readonly UserGroups _userGroups;
-        private readonly Permissions _permissions;
-        private readonly Metrics _metrics;
+        private  Issues _issues;
+        private  Business.System.System _system;
+        private  Filters _filters;
+        private  Languages _languages;
+        private  Rules _rules;
+        private  QualityProfiles _qualityProfiles;
+        private  QualityGates _qualityGates;
+        private  Projects _projects;
+        private  Plugins _plugins;
+        private  Users _users;
+        private  UserGroups _userGroups;
+        private  Permissions _permissions;
+        private  Metrics _metrics;
+        private Measures _measures;
 
         #endregion attributes
 
@@ -55,7 +64,8 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         /// Sonar Api client constructor. One instance per Sonar server address.
         /// </summary>
         /// <param name="baseAddress">The Uri of the server Sonar API</param>
-        public SonarApiClient(Uri baseAddress)
+        
+        private void AffectURI(Uri baseAddress)
         {
             _baseAddress = baseAddress.AbsoluteUri;
             _issues = BaseObjectApi<Issues>.CreateObject(this);
@@ -71,16 +81,32 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
             _userGroups = BaseObjectApi<UserGroups>.CreateObject(this);
             _permissions = BaseObjectApi<Permissions>.CreateObject(this);
             _metrics = BaseObjectApi<Metrics>.CreateObject(this);
+            _measures = BaseObjectApi<Measures>.CreateObject(this);
+        }
+               
+        /// <summary>
+        /// Sonar Api client constructors. One instance per Sonar server address.
+        /// </summary>
+        /// 
+        public SonarApiClient(IConfigurationRoot configuration)
+        {            
+            AffectURI(new Uri(configuration["SonarApiUri"]));            
         }
 
-        /// <summary>
-        /// Sonar Api client constructor. One instance per Sonar server address.
-        /// </summary>
-        public SonarApiClient() : this(new Uri(ConfigurationManager.AppSettings["SonarApiUri"]))
+
+        public SonarApiClient(NameValueCollection configuration)
         {
+            AffectURI(new Uri(configuration["SonarApiUri"]));
         }
+
+        public SonarApiClient(Uri baseAddress)
+        {
+            AffectURI(baseAddress);
+        }
+
 
         #endregion Constructors
+
 
         #region Properties
 
@@ -189,6 +215,10 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         {
             get { return _metrics; }
         }
+        public Measures Measures
+        {
+            get { return _measures; }
+        }
 
         #endregion Properties
 
@@ -205,61 +235,97 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         /// the wanted type T
         /// </param>
         /// <returns>A list of deserialized T from resulting returned by Sonar</returns>
-        public static List<T> QueryList<T>(string queryUrl)
+        public static List<T> QueryList<T>(string queryUrl, IConfigurationRoot configuration)
         {
-            using (WebClient client = GetWebClient())
+            using (HttpClient client = GetWebClient(configuration))
             {
                 string json = null;
-                CallWebApi(() => json = client.DownloadString(queryUrl));
+                CallWebApi( () => json = client.GetStringAsync(queryUrl).Result);
                 var list = JsonConvert.DeserializeObject<List<T>>(json ?? "[]");
                 return list;
             }
         }
 
+        public static List<T> QueryList<T>(string queryUrl, NameValueCollection configuration)
+        {            
+            using (HttpClient client = GetWebClient(configuration))
+            {
+                string json = null;
+                CallWebApi(() => json = client.GetStringAsync(queryUrl).Result);
+                var list = JsonConvert.DeserializeObject<List<T>>(json ?? "[]");
+                return list;
+            }
+        }
+
+       
         /// <summary>
         /// Generic SonarQube API call for getting a single object
         /// </summary>
         /// <typeparam name="T">The class to materialize from the data returned by SonarQube</typeparam>
         /// <param name="queryUrl">The full SonarQube query url</param>
         /// <returns>An instance of T</returns>
-        public static T QueryObject<T>(string queryUrl)
+        public static T QueryObject<T>(string queryUrl, IConfigurationRoot configuration)
         {
-            using (WebClient client = GetWebClient())
+            using (HttpClient client = GetWebClient(configuration)) 
             {
                 string json = null;
-                CallWebApi(() => json = client.DownloadString(queryUrl));
+                CallWebApi( () => json = client.GetStringAsync(queryUrl).Result);
                 T obj = JsonConvert.DeserializeObject<T>(json);
                 return obj;
             }
         }
 
+        public static T QueryObject<T>(string queryUrl, NameValueCollection configuration)
+        {
+            using (HttpClient client = GetWebClient(configuration))
+            {
+                string json = null;
+                CallWebApi(() => json = client.GetStringAsync(queryUrl).Result);
+                T obj = JsonConvert.DeserializeObject<T>(json);
+                return obj;
+            }
+        }
+
+       
         /// <summary>
         /// Method POST data to queryUrl
         /// </summary>
         /// <param name="queryUrl">The full SonarQube query url where data is post</param>
         /// <param name="data">the data to post</param>
-        public static void Post(string queryUrl, string data)
+        public static void Post(string queryUrl, string data, IConfigurationRoot configuration)
         {
-            using (WebClient client = GetWebClient())
+            using (HttpClient client = GetWebClient(configuration))
             {
-                CallWebApi(() => client.UploadString(queryUrl, data));
+                HttpContent content = new StringContent(data);
+                CallWebApi(() => client.PostAsync(queryUrl, content));
             }
         }
 
+        public static void Post(string queryUrl, string data, NameValueCollection configuration)
+        {
+            using (HttpClient client = GetWebClient(configuration))
+            {
+                HttpContent content = new StringContent(data);
+                CallWebApi(() => client.PostAsync(queryUrl, content));
+            }
+        }
+
+      
         /// <summary>
         /// Method DELETE data to queryUrl
         /// </summary>
         /// <param name="queryUrl">The full SonarQube query url where data is removed</param>
         /// <param name="data">data to removed</param>
         /// <returns></returns>
-        public static bool Delete(string queryUrl, string data)
-        {
-            using (WebClient client = GetWebClient())
-            {
-                var result = CallWebApi(() => client.UploadString(queryUrl, "DELETE", data), false);
-                return string.IsNullOrEmpty(result);
-            }
-        }
+        //public static bool Delete(string queryUrl, string data, IConfigurationRoot configuration)
+        //{
+        //    using (HttpClient client = GetWebClient(configuration))
+        //    {
+        //        HttpContent content = new StringContent(data);
+        //        var result = CallWebApi(() => client.UploadString(queryUrl, "DELETE", data), false);
+        //        return string.IsNullOrEmpty(result);
+        //    }
+        //}
 
         /// <summary>
         /// Calls the web API.
@@ -302,15 +368,17 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         /// Method POST data to queryUrl asynchronously
         /// </summary>
         /// <param name="queryUrl">The full SonarQube query url where data is post</param>
-        /// <param name="data">the data to post</param>
-        public async static Task PostAsync(string queryUrl, string data)
+        /// <param name="content">the data to post</param>
+        /*public async static Task PostAsync(string queryUrl, string data, IConfigurationRoot configuration)
         {
-            using (WebClient client = GetWebClient())
+            using (HttpClient client = GetWebClient(configuration))
             {
-                await CallWebApiAsync(() => Task.Factory.StartNew(() => client.UploadString(queryUrl, data)))
+
+                HttpContent content = new StringContent(data);
+                await CallWebApiAsync(() => Task.Factory.StartNew(() => client.PostAsync(queryUrl, content)))
                     .ConfigureAwait(false);
             }
-        }
+        }*/
 
         /// <summary>
         /// Method DELETE data to queryUrl asynchronously
@@ -318,15 +386,15 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         /// <param name="queryUrl">The full SonarQube query url where data is removed</param>
         /// <param name="data">data to removed</param>
         /// <returns></returns>
-        public async static Task<bool> DeleteAsync(string queryUrl, string data)
+        /*public async static Task<bool> DeleteAsync(string queryUrl, string data)
         {
-            using (WebClient client = GetWebClient())
+            using (var client = new HttpClient())
             {
                 var result = await CallWebApiAsync(() => Task.Factory.StartNew(() => client.UploadString(queryUrl, "DELETE", data)), false)
                     .ConfigureAwait(false);
                 return string.IsNullOrEmpty(result);
             }
-        }
+        }*/
 
         /// <summary>
         /// Generic SonarQube API call for getting a list of objects asynchronously
@@ -337,36 +405,62 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         /// the wanted type T
         /// </param>
         /// <returns>A list of deserialized T from resulting returned by Sonar</returns>
-        public async static Task<List<T>> QueryListAsync<T>(string queryUrl)
+        public async static Task<List<T>> QueryListAsync<T>(string queryUrl, IConfigurationRoot configuration)
         {
-            using (WebClient client = GetWebClient())
+            using (HttpClient client = GetWebClient(configuration))
             {
                 string json = null;
-                await CallWebApiAsync(() => Task.Factory.StartNew(() => json = client.DownloadString(queryUrl)))
+                await CallWebApiAsync(async () => await await Task.Factory.StartNew(async () => json = await client.GetStringAsync(queryUrl)))
                     .ConfigureAwait(false);
                 var list = JsonConvert.DeserializeObject<List<T>>(json ?? "[]");
                 return list;
             }
         }
 
+        public async static Task<List<T>> QueryListAsync<T>(string queryUrl, NameValueCollection configuration)
+        {
+            using (HttpClient client = GetWebClient(configuration))
+            {
+                string json = null;
+                await CallWebApiAsync(async () => await await Task.Factory.StartNew(async () => json = await client.GetStringAsync(queryUrl)))
+                    .ConfigureAwait(false);
+                var list = JsonConvert.DeserializeObject<List<T>>(json ?? "[]");
+                return list;
+            }
+        }
+
+       
         /// <summary>
         /// Generic SonarQube API call for getting a single object asynchronously
         /// </summary>
         /// <typeparam name="T">The class to materialize from the data returned by SonarQube</typeparam>
         /// <param name="queryUrl">The full SonarQube query url</param>
         /// <returns>An instance of T</returns>
-        public async static Task<T> QueryObjectAsync<T>(string queryUrl)
+        public async static Task<T> QueryObjectAsync<T>(string queryUrl, IConfigurationRoot configuration)
         {
-            using (WebClient client = GetWebClient())
+            using (HttpClient client = GetWebClient(configuration))
             {
                 string json = null;
-                await CallWebApiAsync(() => Task.Factory.StartNew(() => json = client.DownloadString(queryUrl)))
+                await CallWebApiAsync(async () => await await Task.Factory.StartNew(async () => json = await client.GetStringAsync(queryUrl)))
                     .ConfigureAwait(false);
                 T obj = JsonConvert.DeserializeObject<T>(json);
                 return obj;
             }
         }
 
+        public async static Task<T> QueryObjectAsync<T>(string queryUrl, NameValueCollection configuration)
+        {
+            using (HttpClient client = GetWebClient(configuration))
+            {
+                string json = null;
+                await CallWebApiAsync(async () => await await Task.Factory.StartNew(async () => json = await client.GetStringAsync(queryUrl)))
+                    .ConfigureAwait(false);
+                T obj = JsonConvert.DeserializeObject<T>(json);
+                return obj;
+            }
+        }
+
+        
         /// <summary>
         /// Calls the web API asynchronous.
         /// </summary>
@@ -412,14 +506,17 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
         /// or
         /// SonarApiPassword not found in app.config !
         /// </exception>
-        private static WebClient GetWebClient(int timeOut = 0)
+        private static HttpClient GetWebClient(IConfigurationRoot configuration, int timeOut = 0)
         {
-            WebClient client = (timeOut == 0) ? new WebClient() : new CustomTimeOutWebClient(timeOut);
-            string token = ConfigurationManager.AppSettings["SonarApiToken"];
+            HttpClient client = (timeOut == 0) ? new HttpClient() : new CustomTimeOutWebClient(timeOut);
+            //IConfigurationRoot configuration = GetConfig();
+
+
+            string token = configuration["SonarApiToken"];
             if (string.IsNullOrEmpty(token))
             {
-                string login = ConfigurationManager.AppSettings["SonarApiLogin"];
-                string password = ConfigurationManager.AppSettings["SonarApiPassword"];
+                string login = configuration["SonarApiLogin"];
+                string password = configuration["SonarApiPassword"];
 
                 if (String.IsNullOrEmpty(login))
                 {
@@ -429,20 +526,53 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper
                 {
                     throw new ArgumentNullException("SonarApiPassword not found in app.config !");
                 }
-
-                string credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(login + ":" + password));
-                client.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;
+                var bytes = Encoding.UTF8.GetBytes(login + ":" + password);
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(bytes));               
             }
             else
             {
-                string credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(token + ":"));
-                client.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;
+                var bytes = Encoding.UTF8.GetBytes(token + ":");
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(bytes));
+                
             }
-            client.Encoding = Encoding.UTF8; // because of special characters like accents
-
+                      
             return client;
         }
 
+        private static HttpClient GetWebClient(NameValueCollection configuration, int timeOut = 0)
+        {
+            HttpClient client = (timeOut == 0) ? new HttpClient() : new CustomTimeOutWebClient(timeOut);
+            //IConfigurationRoot configuration = GetConfig();
+
+
+            string token = configuration["SonarApiToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                string login = configuration["SonarApiLogin"];
+                string password = configuration["SonarApiPassword"];
+
+                if (String.IsNullOrEmpty(login))
+                {
+                    throw new ArgumentNullException("SonarApiLogin not found in app.config !");
+                }
+                if (String.IsNullOrEmpty(password))
+                {
+                    throw new ArgumentNullException("SonarApiPassword not found in app.config !");
+                }
+                var bytes = Encoding.UTF8.GetBytes(login + ":" + password);
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(bytes));
+            }
+            else
+            {
+                var bytes = Encoding.UTF8.GetBytes(token + ":");
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(bytes));
+
+            }
+
+            return client;
+        }
         #endregion Methods
+
+
     }
 }

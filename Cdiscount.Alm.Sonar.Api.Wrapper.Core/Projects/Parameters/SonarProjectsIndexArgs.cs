@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Projects.Parameters
 {
+
     public enum VersionsValues
     {
         _true,

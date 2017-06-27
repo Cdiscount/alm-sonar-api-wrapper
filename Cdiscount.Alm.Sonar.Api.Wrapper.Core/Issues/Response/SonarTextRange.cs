@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Response
 {
+
     public class SonarTextRange
     {
         /// <summary>

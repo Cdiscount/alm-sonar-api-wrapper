@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Permissions.Project.Parameters
 {
+
     public enum QualifierValues
     {
         TRK

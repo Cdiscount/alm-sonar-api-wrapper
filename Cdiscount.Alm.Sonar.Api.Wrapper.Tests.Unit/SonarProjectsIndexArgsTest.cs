@@ -14,6 +14,8 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit
         [TestMethod()]
         public void SonarProjectsIndexArgsToStringTest()
         {
+
+
             var args = new SonarProjectsIndexArgs()
             {
                 Desc = false,
@@ -28,5 +30,6 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit
             Assert.AreEqual(args.ToString(), string.Format("?desc={0}&format={1}&key={2}&libs={3}&search={4}&subprojects={5}&versions={6}&views={7}"
                 , "false", Constants.Format.Json, "testKey", "true", "toto", "false", "false", "true"));
         }
+
     }
 }

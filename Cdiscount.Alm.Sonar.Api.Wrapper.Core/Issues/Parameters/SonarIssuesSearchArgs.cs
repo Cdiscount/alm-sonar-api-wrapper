@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+using System.Net;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Parameters
 {
+    
     /// <summary>
     /// Comma-separated list of the optional fields to be returned in response. Action plans are dropped in 5.5, it is not returned in the response.
     /// </summary>
@@ -54,6 +53,15 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Parameters
         /// The assigned.
         /// </value>
         public bool? Assigned { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the assigned. To retrieve assigned or unassigned issues
+        /// </summary>
+        /// <value>
+        /// The assigned.
+        /// </value>
+        public bool Resolved { get; set; }
 
         /// <summary>
         /// Gets or sets the assignees. Comma-separated list of assignee logins. The value '__me__' can be used as a placeholder for user who performs the request
@@ -142,18 +150,18 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Parameters
             SonarHelpers.AppendUrl(result, "tags", Tags);
             if (CreatedAfter != null)
             {
-                SonarHelpers.AppendUrl(result, "createdAfter", HttpUtility.UrlEncode(SonarHelpers.FormatDateForSonarIso8601(CreatedAfter.Value)));
+                SonarHelpers.AppendUrl(result, "createdAfter", WebUtility.UrlEncode(SonarHelpers.FormatDateForSonarIso8601(CreatedAfter.Value)));
                 // when scanning for createdAfter, automatically sort by created date
                 SonarHelpers.AppendUrl(result, "s", "CREATION_DATE");
                 SonarHelpers.AppendUrl(result, "asc", "true");
             }
             if (CreatedAt != null)
             {
-                SonarHelpers.AppendUrl(result, "createdAt", HttpUtility.UrlEncode(SonarHelpers.FormatDateForSonarIso8601(CreatedAt.Value)));
+                SonarHelpers.AppendUrl(result, "createdAt", WebUtility.UrlEncode(SonarHelpers.FormatDateForSonarIso8601(CreatedAt.Value)));
             }
             if (CreatedBefore != null)
             {
-                SonarHelpers.AppendUrl(result, "createdBefore", HttpUtility.UrlEncode(SonarHelpers.FormatDateForSonarIso8601(CreatedBefore.Value)));
+                SonarHelpers.AppendUrl(result, "createdBefore", WebUtility.UrlEncode(SonarHelpers.FormatDateForSonarIso8601(CreatedBefore.Value)));
             }
             SonarHelpers.AppendUrl(result, "additionalFields", AdditionalFields);
             SonarHelpers.AppendUrl(result, "assignees", Assignees);
@@ -161,6 +169,7 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Parameters
             SonarHelpers.AppendUrl(result, "componentKeys", ComponentKeys);
             SonarHelpers.AppendUrl(result, "componentUuids", ComponentUuids);
             SonarHelpers.AppendUrl(result, "severities", Severities);
+            SonarHelpers.AppendUrl(result, "resolved", Resolved.ToString().ToLowerInvariant());
 
             return result.Length > 0 ? "?" + result : string.Empty;
         }

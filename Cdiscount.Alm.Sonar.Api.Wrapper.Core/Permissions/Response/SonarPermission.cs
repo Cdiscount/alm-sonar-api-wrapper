@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Permissions.Response
 {
+    
     /// <summary>
     /// Represents a permission
     /// </summary>

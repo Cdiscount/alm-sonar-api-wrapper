@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Metrics.Response
 {
+    
     /// <summary>
     /// Represents a list of metric types
     /// </summary>

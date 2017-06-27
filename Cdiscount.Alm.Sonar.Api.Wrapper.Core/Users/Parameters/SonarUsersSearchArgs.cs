@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Users.Parameters
 {
+    
     /// <summary>
     /// Arguments to get the list of users
     /// </summary>

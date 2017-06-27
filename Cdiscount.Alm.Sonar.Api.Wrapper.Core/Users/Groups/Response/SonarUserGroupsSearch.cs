@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Users.Groups.Response
 {
+    
     /// <summary>
     /// Represents a list of user groups
     /// </summary>

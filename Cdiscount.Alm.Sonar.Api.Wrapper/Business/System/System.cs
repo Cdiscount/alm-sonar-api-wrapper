@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cdiscount.Alm.Sonar.Api.Wrapper.Core.System.Response;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Specialized;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.System
 {
+
     public class System : BaseObjectApi<System>
     {
         /// <summary>
@@ -19,10 +22,15 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.System
         ///DB_MIGRATION_RUNNING: DB migration is running(refer to WS /api/system/migrate_db for details)
         /// </summary>
         /// <returns></returns>
-        public SonarSystemStatus Status()
+        public SonarSystemStatus Status(IConfigurationRoot configuration)
         {
             string url = string.Format("{0}api/system/status", SonarApiClient.BaseAddress);
-            return SonarApiClient.QueryObject<SonarSystemStatus>(url);
+            return SonarApiClient.QueryObject<SonarSystemStatus>(url, configuration);
+        }
+        public SonarSystemStatus Status(NameValueCollection configuration)
+        {
+            string url = string.Format("{0}api/system/status", SonarApiClient.BaseAddress);
+            return SonarApiClient.QueryObject<SonarSystemStatus>(url, configuration);
         }
     }
 }

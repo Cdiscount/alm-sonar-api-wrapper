@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cdiscount.Alm.Sonar.Api.Wrapper", "Cdiscount.Alm.Sonar.Api.Wrapper\Cdiscount.Alm.Sonar.Api.Wrapper.csproj", "{8E76419C-81CF-421B-980C-AE752EE02A1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cdiscount.Alm.Sonar.Api.Wrapper", "Cdiscount.Alm.Sonar.Api.Wrapper\Cdiscount.Alm.Sonar.Api.Wrapper.csproj", "{8E76419C-81CF-421B-980C-AE752EE02A1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cdiscount.Alm.Sonar.Api.Wrapper.Core", "Cdiscount.Alm.Sonar.Api.Wrapper.Core\Cdiscount.Alm.Sonar.Api.Wrapper.Core.csproj", "{D63E2F7A-BD1E-40B7-B43B-0B729A2B8D2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cdiscount.Alm.Sonar.Api.Wrapper.Core", "Cdiscount.Alm.Sonar.Api.Wrapper.Core\Cdiscount.Alm.Sonar.Api.Wrapper.Core.csproj", "{D63E2F7A-BD1E-40B7-B43B-0B729A2B8D2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{199C1223-65EE-4C15-8EE5-483C89D3E9D0}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +15,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit", "Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit\Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit.csproj", "{E492737F-554E-4131-AC57-88CEAA241408}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Integration", "Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Integration\Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Integration.csproj", "{DF650001-8896-4DFD-8961-B1204CA40D71}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigCore", "TestConfigCore\ConfigCore.csproj", "{F249EAD8-23A8-43FB-A31C-18BFD4048417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigFramework", "TestConfigFramework\ConfigFramework.csproj", "{DDA9B641-1CB8-4C17-BAF2-5484377B796B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +42,14 @@ Global
 		{DF650001-8896-4DFD-8961-B1204CA40D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF650001-8896-4DFD-8961-B1204CA40D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF650001-8896-4DFD-8961-B1204CA40D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F249EAD8-23A8-43FB-A31C-18BFD4048417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F249EAD8-23A8-43FB-A31C-18BFD4048417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F249EAD8-23A8-43FB-A31C-18BFD4048417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F249EAD8-23A8-43FB-A31C-18BFD4048417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA9B641-1CB8-4C17-BAF2-5484377B796B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA9B641-1CB8-4C17-BAF2-5484377B796B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA9B641-1CB8-4C17-BAF2-5484377B796B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA9B641-1CB8-4C17-BAF2-5484377B796B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
