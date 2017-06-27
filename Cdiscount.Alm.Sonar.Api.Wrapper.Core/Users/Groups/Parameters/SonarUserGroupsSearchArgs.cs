@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Users.Groups.Parameters
 {
+
     public enum FieldsValues
     {
         name,

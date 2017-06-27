@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Components.Response
 {
+    
     /// <summary>
     /// Represents a Sonar component (of a project)
     /// </summary>

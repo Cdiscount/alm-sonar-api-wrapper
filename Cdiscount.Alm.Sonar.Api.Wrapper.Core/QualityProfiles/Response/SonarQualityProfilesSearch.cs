@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.QualityProfiles.Response
 {
+
     public class SonarQualityProfilesSearch
     {
         #region Sonar Properties

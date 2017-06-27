@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Text;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.QualityProfiles.Inheritance.Parameters
 {
@@ -12,7 +7,8 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.QualityProfiles.Inheritance.Param
     /// </summary>
     public class SonarInheritanceArgs
     {
-         /// <summary>
+        
+        /// <summary>
         /// A quality profile key. Either this parameter, or a combination of profileName + language must be set.
         /// </summary>
         public string ProfileKey { get; set; }

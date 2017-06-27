@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.System.Response
 {
+
     public class SonarSystemStatus
     {
         /// <summary>

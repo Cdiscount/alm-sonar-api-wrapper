@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.Issues.Comments
 {
+    
     /// <summary>
     /// Manage the comments of an issue 
     /// </summary>
@@ -20,7 +21,7 @@ namespace Cdiscount.Alm.Sonar.Api.Wrapper.Business.Issues.Comments
         public void Add(CommentAddArgs commentAddArgs)
         {
             string url = String.Format("{0}api/issues/add_comment", this.SonarApiClient.BaseAddress);
-            SonarApiClient.Post(url, commentAddArgs.ToString());
+            //SonarApiClient.Post(url, commentAddArgs.ToString());
         }
     }
 }

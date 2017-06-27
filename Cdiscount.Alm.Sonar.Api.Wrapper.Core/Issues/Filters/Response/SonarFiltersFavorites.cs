@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Filters.Response
 {
+    
     /// <summary>
     /// Represents a list favoriteFilters
     /// </summary>

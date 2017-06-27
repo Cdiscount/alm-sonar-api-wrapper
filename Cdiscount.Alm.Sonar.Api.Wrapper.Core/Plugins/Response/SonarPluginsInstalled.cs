@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Plugins.Response
 {
+    
     /// <summary>
     /// Represents a sonar plugin
     /// </summary>

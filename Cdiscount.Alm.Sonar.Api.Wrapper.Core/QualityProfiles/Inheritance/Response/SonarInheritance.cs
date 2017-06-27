@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.QualityProfiles.Inheritance.Response
 {
+    
     /// <summary>
     /// Represents the inheritance of a quality profile
     /// </summary>

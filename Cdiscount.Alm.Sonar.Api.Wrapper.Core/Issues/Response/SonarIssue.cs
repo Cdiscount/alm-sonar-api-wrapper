@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Response
 {
+    
     /// <summary>
     /// Represents a Sonar issue
     /// </summary>

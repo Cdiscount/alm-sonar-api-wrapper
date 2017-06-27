@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Core.Issues.Response
 {
+    
     /// <summary>
     /// Represents a Sonar search among issues
     /// </summary>

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using System.Web;
 
 namespace Cdiscount.Alm.Sonar.Api.Wrapper.Tests.Unit
-{
+{ 
+
     [TestClass()]
     public class CommentAddArgsTest
     {
